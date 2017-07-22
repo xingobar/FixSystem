@@ -24,3 +24,11 @@ Route::post('/store_brand','BrandController@store');
 // product
 Route::get('/add_product','ProductController@create');
 Route::post('/store_product','ProductController@store');
+
+// department
+Route::get('/add_dep','DepartmentController@create');
+Route::post('/store_dep','DepartmentController@store');
+
+// unit
+Route::get('/add_unit','UnitController@create');
+Route::post('/store_unit','UnitController@store');
