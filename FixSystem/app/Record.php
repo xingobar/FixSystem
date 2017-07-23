@@ -8,10 +8,12 @@ class Record extends Model
 {
     protected $table = 'record';
 
-    protected $fillabel  = ['customer_name',
+    protected $fillable  = ['customer_name',
                             'customer_phone',
                             'description',
-                            'location'];
+                            'location',
+                            'unit_id',
+                            'product_id'];
     
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');

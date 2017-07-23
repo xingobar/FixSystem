@@ -15,4 +15,11 @@ class DepartmentRepository
         $department = Department::select('id','name')->get();
         return $department;
     }
+
+    public function getFirstDepartmentId(){
+        $departmentId = Department::select('id')
+                                  ->orderBy('id','asc')
+                                  ->first();
+        return $departmentId->id;
+    }
 }

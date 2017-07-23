@@ -15,6 +15,13 @@ class BrandRepository
         $brand->save();
     }
 
+    public function getFirstBrandId(){
+        $brandId = Brand::select('id')
+                         ->orderBy('id','asc')
+                         ->first();
+        return $brandId->id;
+    }
+
 }
 
 

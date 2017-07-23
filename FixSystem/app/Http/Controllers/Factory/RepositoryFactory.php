@@ -6,6 +6,7 @@ use App\Http\Controllers\Repository\BrandRepository;
 use App\Http\Controllers\Repository\DepartmentRepository;
 use App\Http\Controllers\Repository\ProductRepository;
 use App\Http\Controllers\Repository\UnitRepository;
+use App\Http\Controllers\Repository\RecordRepository;
 
 class RepositoryFactory
 {
@@ -13,6 +14,7 @@ class RepositoryFactory
     private static $departmentRepository;
     private static $productRepository;
     private static $unitRepository;
+    private static $recordRepository;
 
     public static function getBrandRepository(){
         if(self::$brandRepository){
@@ -44,5 +46,13 @@ class RepositoryFactory
         }
         self::$unitRepository = new UnitRepository();
         return self::$unitRepository;
+    }
+
+    public static function getRecordRepository(){
+        if(self::$recordRepository){
+            return self::$recordRepository;
+        }
+        self::$recordRepository = new RecordRepository();
+        return self::$recordRepository;
     }
 }

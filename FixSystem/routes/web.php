@@ -37,4 +37,5 @@ Route::post('/store_unit','UnitController@store');
 Route::get('/add_record','FixController@create');
 Route::post('/store_record','FixController@store');
 Route::post('/get_product/{product_id}','FixController@getSpecifiedProduct');
-Route::post('/get_unit','FixController@getSpecifiedUnit');
+Route::post('/get_unit/{department_id}','FixController@getSpecifiedUnit');
+Route::post('/get_model/{product_name}','FixController@getModelByProductName');

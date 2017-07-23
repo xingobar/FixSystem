@@ -12,7 +12,7 @@ class UnitRepository
     }
 
     public function getSpecifiedUnit($department_id){
-        $unit = Unit::where('department_id'.$department_id)->get();
+        $unit = Unit::where('department_id',$department_id)->get();
         return $unit;
     }
 }

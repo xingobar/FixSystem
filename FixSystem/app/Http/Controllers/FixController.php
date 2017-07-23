@@ -4,27 +4,54 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Factory\RepositoryFactory;
+use App\Http\Controllers\Repository\RecordRepository;
 use Log;
 
 class FixController extends Controller
 {
-    public function __construct(){
+
+    protected $recordRepository;
+
+    public function __construct(RecordRepository $recordRepository){
         $this->middleware('auth');
+        $this->recordRepository = $recordRepository;
     }
 
     public function create(){
+        
         $departmentRepository = RepositoryFactory::getDepartmentRepository();
         $brandRepository = RepositoryFactory::getBrandRepository();
+        $unitRepository = RepositoryFactory::getUnitRepository();
+        $productRepository = RepositoryFactory::getProductRepository();
+
         $department = $departmentRepository->getDepartment();
+        $departmentId = $departmentRepository->getFirstDepartmentId();
+        
+        $unit = $unitRepository->getSpecifiedUnit($departmentId);
         $brand = $brandRepository->getBrand();
+        $brandId = $brandRepository->getFirstBrandId();
+        
+        $product = $productRepository->getSpecifiedProduct($brandId);
+        $productName = $productRepository->getFirstProductName();
+        
+        $model = $productRepository->getModelByProductName($productName);
+        Log::info('productName : ' . $productName);
+        Log::info('model count :  ' . count($model) );
+
         return view('record.create',[
             'departments'=>$department,
-            'brands'=>$brand
+            'brands'=>$brand,
+            'units'=>$unit,
+            'products'=>$product,
+            'models' => $model
         ]);
     }
 
-    public function store(){
-
+    public function store(Request $request){
+        $record = $request->except(['model','brand','department_id']);
+        Log::info($record);
+        $this->recordRepository->insertRecord($record);
+        return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
 
     public function getSpecifiedProduct($brand_id){
@@ -39,5 +66,11 @@ class FixController extends Controller
         $unitRepository = RepositoryFactory::getUnitRepository();
         $unit = $unitRepository->getSpecifiedUnit($department_id);
         return((object)$unit);
+    }
+
+    public function getModelByProductName($name){
+        $productRepository = RepositoryFactory::getProductRepository();
+        $model = $productRepository->getModelByProductName($name);
+        return((object)$model);
     }
 }
