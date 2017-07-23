@@ -10,4 +10,9 @@ class UnitRepository
         $unit = new Unit($unit);
         $unit->save();
     }
+
+    public function getSpecifiedUnit($department_id){
+        $unit = Unit::where('department_id'.$department_id)->get();
+        return $unit;
+    }
 }

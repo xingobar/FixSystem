@@ -12,6 +12,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     @yield('style')
 </head>
 <body>
@@ -39,6 +45,7 @@
                     <ul class="nav navbar-nav">
                         &nbsp;
                         <li><a href="/home">首頁</a></li>
+                        <li><a href="/add_record">新增報修</a></li>
                         <li><a href="/add_brand">新增品牌</a></li>
                         <li><a href="/add_product">新增商品</a></li>
                         <li><a href="/add_dep">新增部門</a></li>
@@ -82,5 +89,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @yield('script')
 </body>
 </html>
