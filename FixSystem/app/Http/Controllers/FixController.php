@@ -54,6 +54,34 @@ class FixController extends Controller
         return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
 
+    public function edit($record_id = 1){
+        $recordRepository = RepositoryFactory::getRecordRepository();
+        $record = $recordRepository->getSpecifiedRecord($record_id);
+        return view('record.edit',[
+            'record'=>$record[0]
+        ]);
+    }
+
+    public function update($record_id,Request $request){
+        try{
+            $recordRepository = RepositoryFactory::getRecordRepository();
+            $productRepository = RepositoryFactory::getProductRepository();
+
+            $record = $recordRepository->getSpecifiedRecord($record_id);
+            $record =  $record[0];
+
+            $product = $productRepository->getProductById($record->product_id);
+            $productRepository->updateProductName($product,$request->product);
+
+            $recordRepository->updateReocrd($record,$request->all());
+
+
+            return redirect()->back()->withErrors(array(['msg'=>'success']));
+        }catch(Exception $ex){
+            return redirect()->back()->withErrors(array(['msg'=>'error']));
+        }
+    }
+
     public function getSpecifiedProduct($brand_id){
         Log::info('selected brand id ' . $brand_id);
         $productRepository = RepositoryFactory::getProductRepository();

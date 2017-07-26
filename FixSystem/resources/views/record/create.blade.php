@@ -7,13 +7,18 @@
 @section('content')
 <div class="container">
     @if($errors->any())
-        @if($errors->first() === 'success')
         <div class="row">
-            <div class="alert alert-success">
-                <strong>Success!</strong>新增報修成功.
-            </div>        
+            @if($errors->first() === 'success')
+                <div class="alert alert-success">
+                    <strong>Success!</strong>新增報修成功.
+                </div> 
+            @endif
+            @if($errors->first() === 'error')
+                <div class="alert alert-danger">
+                    <strong>Wrong!</strong>修改失敗.
+                </div>
+            @endif       
         </div>
-        @endif
     @endif
     <div class="row">
         <div class="col-md-offset-2 col-md-8">

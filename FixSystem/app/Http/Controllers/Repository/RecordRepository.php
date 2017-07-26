@@ -18,4 +18,15 @@ class RecordRepository
         $record = Record::orderBy('id','asc')->paginate(10);
         return $record;
     }
+
+    public function getSpecifiedRecord($recordId){
+        $record = Record::where('id',$recordId)->get();
+        return $record;
+    }
+
+    public function updateReocrd($recordObj,$recordRequest){
+        $recordObj->fill($recordRequest);
+        $recordObj->save();
+    }
+
 }

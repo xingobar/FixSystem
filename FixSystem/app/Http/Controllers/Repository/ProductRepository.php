@@ -27,4 +27,14 @@ class ProductRepository
                           ->get();
         return $model;
     }
+
+    public function getProductById($id){
+        $product = Product::where('id',$id)->first();
+        return $product;
+    }
+
+    public function updateProductName($product,$name){
+        $product->name = $name;
+        $product->save();
+    }
 }
