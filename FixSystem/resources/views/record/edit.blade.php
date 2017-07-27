@@ -8,6 +8,10 @@
 </style>
 @endsection
 
+@section('script')
+<script src="{{asset('js/index.js')}}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     @if($errors->any())
@@ -38,25 +42,65 @@
                     <tr>
                         <td>部門名稱</td>
                         <td class="col-md-3">
-                           <input type="text" class="form-control" name="department" value="{{$record->unit->department->name}}">
+                            <select name="department" id="department_id" class="form-control">
+                                @foreach($departments as $department)
+                                    @if($department->id === $record->unit->department->id)
+                                        <option value="{{$department->id}}" selected>{{$department->name}}</option>
+                                    @else
+                                        <option value="{{$department->id}}">{{$department->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                         <td>單位名稱</td>
                         <td colspan="3">
-                            <input type="text" class="form-control" name="unit" value="{{$record->unit->name}}">
+                            <select name="unit" class="form-control" id="unit">
+                                 @foreach($units as $unit)
+                                    @if($unit->id === $record->unit_id)
+                                        <option value="{{$unit->id}}" selected>{{$unit->name}}</option>
+                                    @else
+                                        <option value="{{$unit->id}}">{{$unit->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
                     <tr>
                         <td>產牌</td>
                         <td class="col-md-2">
-                           <input type="text" class="form-control" name="brand" value="{{$record->product->brand->name}}">
+                            <select name="brand_id" class="form-control" id="brand_id">
+                                @foreach($brands as $brand)
+                                    @if($brand->id === $record->product->brand->id)
+                                        <option value="{{$brand->id}}" selected>{{$brand->name}}</option>
+                                    @else
+                                        <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                         <td>型號</td>
                         <td class="col-md-2">
-                           <input type="text" class="form-control" name="model" value="{{$record->product->model}}">
+                            <select name="model" class="form-control" id="model">
+                                @foreach($products as $product)
+                                    @if($product->model === $record->product->model)
+                                        <option value="{{$product->id}}" selected>{{$product->model}}</option>
+                                    @else
+                                        <option value="{{$product->id}}">{{$product->model}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                         <td>產品</td>
                         <td class="col-md-2">
-                           <input type="text" class="form-control" name="product" value="{{$record->product->name}}">
+                            <select name="product" class="form-control" id="product">
+                                @foreach($products as $product)
+                                    @if($product->id === $record->product->id)
+                                        <option value="{{$product->id}}" selected>{{$product->name}}</option>
+                                    @else
+                                        <option value="{{$product->id}}">{{$product->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
                         </td>
                     </tr>
                 </tbody>

@@ -56,9 +56,24 @@ class FixController extends Controller
 
     public function edit($record_id = 1){
         $recordRepository = RepositoryFactory::getRecordRepository();
+        $productRepository = RepositoryFactory::getProductRepository();
+        $brandRepository = RepositoryFactory::getBrandRepository();
+        $unitRepository = RepositoryFactory::getUnitRepository();
+        $departmentRepository = RepositoryFactory::getDepartmentRepository();
+
+
         $record = $recordRepository->getSpecifiedRecord($record_id);
+        $products = $productRepository->getProduct();
+        $brands = $brandRepository->getBrand();
+        $units = $unitRepository->getUnit();
+        $departments = $departmentRepository->getDepartment();
+
         return view('record.edit',[
-            'record'=>$record[0]
+            'record'=>$record[0],
+            'products'=>$products,
+            'brands'=>$brands,
+            'units'=>$units,
+            'departments'=>$departments
         ]);
     }
 

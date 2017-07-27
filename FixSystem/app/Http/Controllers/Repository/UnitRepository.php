@@ -15,4 +15,9 @@ class UnitRepository
         $unit = Unit::where('department_id',$department_id)->get();
         return $unit;
     }
+
+    public function getUnit(){
+        $unit = Unit::orderBy('created_at','asc')->get();
+        return $unit;
+    }
 }

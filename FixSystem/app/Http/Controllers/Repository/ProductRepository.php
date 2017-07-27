@@ -33,8 +33,14 @@ class ProductRepository
         return $product;
     }
 
-    public function updateProductName($product,$name){
-        $product->name = $name;
+    public function updateProductName($product,$id){
+        $p = $this->getProductById($id);
+        $product->name = $p->name;
         $product->save();
+    }
+
+    public function getProduct(){
+        $product = Product::orderBy('created_at','asc')->get();
+        return $product;
     }
 }
