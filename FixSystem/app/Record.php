@@ -25,7 +25,11 @@ class Record extends Model
                             'description',
                             'location',
                             'unit_id',
-                            'product_id'];
+                            'product_id',
+                            'work_start',
+                            'work_end',
+                            'departure_time',
+                            'arrival_time'];
     
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');

@@ -96,9 +96,15 @@ class FixController extends Controller
 
     public function delete($record_id){
         $record = Record::findOrFail($record_id);
-        $record->delete();
+        $record->delete(); // soft delete
         return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
+
+    public function update_progress_time(Request $request , $record_id){
+        $recordRepository = RepositoryFactory::getRecordRepository();
+        $recordRepository->updateProgressTime($request->all(),$record_id);
+    }
+
 
     public function getSpecifiedProduct($brand_id){
         Log::info('selected brand id ' . $brand_id);

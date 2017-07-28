@@ -29,4 +29,10 @@ class RecordRepository
         $recordObj->save();
     }
 
+    public function updateProgressTime($request,$id){
+        $record = Record::findOrFail($id);
+        $record->fill($request);
+        $record->save();
+    }
+
 }

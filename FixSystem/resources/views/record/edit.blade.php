@@ -6,10 +6,35 @@
       text-align:center;
   }
 </style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css" />
 @endsection
 
 @section('script')
 <script src="{{asset('js/index.js')}}"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".work_start").datetimepicker({
+            format:'YYYY-MM-DD hh:mm'
+        });
+        $(".work_end").datetimepicker({
+            format:'YYYY-MM-DD hh:mm'
+        });
+        $(".arrival_time").datetimepicker({
+            format:'YYYY-MM-DD hh:mm'
+        });
+        $(".departure_time").datetimepicker({
+            format:'YYYY-MM-DD hh:mm'
+        });
+    })
+    
+</script>
 @endsection
 
 @section('content')
@@ -107,6 +132,64 @@
             </table>
             <div class="form-group pull-right">
                 <button type="submit" class="btn btn-success btn-lg">修改</button>
+            </div>
+        </form>
+        <div class="row"></div>
+        <form class="form-horizontal" method="post" action="/update_progress_time/{{$record->id}}">
+            {{csrf_field()}}
+            <h4>工作進度</h4>
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                      <td>交通時間</td>
+                      <td>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label class="control-label" for="start">出發時間</label>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" size="16" class="departure_time form-control" name="departure_time">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="control-label" for="end">抵達抵達</label>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="input-group">
+                                    <input type="text" size="16" class="arrival_time form-control" name="arrival_time">
+                                </div>
+                            </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                       <td>作業時間</td>
+                       <td>
+                           <div class="row">
+                               <div class="col-md-3">
+                                   <label for="work_start" class="control-label">開始時間</label>
+                               </div>
+                               <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" size="16" class="work_start form-control" name="work_start">
+                                    </div>
+                               </div>
+                               <div class="col-md-3">
+                                   <label for="work_end" class="control-label">結束時間</label>
+                               </div>
+                               <div class="col-md-3">
+                                    <div class="input-group">
+                                        <input type="text" size="16" class="work_end form-control" name="work_end">
+                                    </div>
+                               </div>
+                           </div>
+                       </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group pull-right">
+                <button type="submit" class="btn btn-success btn-lg">提交</button>
             </div>
         </form>
     </div>
