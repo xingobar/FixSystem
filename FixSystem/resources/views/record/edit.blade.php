@@ -26,7 +26,7 @@
     <div class="jumbotron" style="background-color:transparent;">
         <form class="form-horizontal" method="post" action="/update_record/{{$record->id}}">
             {{csrf_field()}}
-            <h4>負責人</h4>
+            <h4>負責人 : {{$record->user->name}}</h4>
             <table class="table table-bordered">
                 <tbody>
                     <tr>
@@ -54,7 +54,7 @@
                         </td>
                         <td>單位名稱</td>
                         <td colspan="3">
-                            <select name="unit" class="form-control" id="unit">
+                            <select name="unit_id" class="form-control" id="unit">
                                  @foreach($units as $unit)
                                     @if($unit->id === $record->unit_id)
                                         <option value="{{$unit->id}}" selected>{{$unit->name}}</option>
@@ -83,16 +83,16 @@
                             <select name="model" class="form-control" id="model">
                                 @foreach($products as $product)
                                     @if($product->model === $record->product->model)
-                                        <option value="{{$product->id}}" selected>{{$product->model}}</option>
+                                        <option value="{{$product->model}}" selected>{{$product->model}}</option>
                                     @else
-                                        <option value="{{$product->id}}">{{$product->model}}</option>
+                                        <option value="{{$product->model}}">{{$product->model}}</option>
                                     @endif
                                 @endforeach
                             </select>
                         </td>
                         <td>產品</td>
                         <td class="col-md-2">
-                            <select name="product" class="form-control" id="product">
+                            <select name="product_id" class="form-control" id="product">
                                 @foreach($products as $product)
                                     @if($product->id === $record->product->id)
                                         <option value="{{$product->id}}" selected>{{$product->name}}</option>

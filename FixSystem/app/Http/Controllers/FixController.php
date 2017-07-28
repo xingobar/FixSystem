@@ -85,11 +85,7 @@ class FixController extends Controller
             $record = $recordRepository->getSpecifiedRecord($record_id);
             $record =  $record[0];
 
-            $product = $productRepository->getProductById($record->product_id);
-            $productRepository->updateProductName($product,$request->product);
-
             $recordRepository->updateReocrd($record,$request->all());
-
 
             return redirect()->back()->withErrors(array(['msg'=>'success']));
         }catch(Exception $ex){
