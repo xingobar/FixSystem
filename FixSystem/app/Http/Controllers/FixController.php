@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\RecordRepository;
 use Log;
+use App\Record;
 
 class FixController extends Controller
 {
@@ -91,6 +92,12 @@ class FixController extends Controller
         }catch(Exception $ex){
             return redirect()->back()->withErrors(array(['msg'=>'error']));
         }
+    }
+
+    public function delete($record_id){
+        $record = Record::findOrFail($record_id);
+        $record->delete();
+        return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
 
     public function getSpecifiedProduct($brand_id){

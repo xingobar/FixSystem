@@ -36,7 +36,7 @@
                         </td>
                         <td>顧客聯絡方式</td>
                         <td colspan="3">
-                            <input type="number" class="form-control" name="customer_phone" value="{{$record->customer_phone}}">
+                            <input type="number" class="form-control" name="customer_phone" value="0{{$record->customer_phone}}">
                         </td>
                     </tr>
                     <tr>
