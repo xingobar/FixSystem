@@ -57,71 +57,18 @@ class RecordRepository
         return $record;
     }
 
-    public function getRecordByBrandName($name){
-        Log::info($name);
+
+    public function getRecordBySomething($column,$name)
+    {
         $record = Record::select('record.*')
                     ->join('unit','unit.id','=','record.unit_id')
                     ->join('department','department.id','=','unit.department_id')
                     ->join('product','product.id','=','record.product_id')
                     ->join('brand','brand.id','=','product.brand_id')
-                    ->where('brand.name',$name)
+                    ->where($column,$name)
                     ->orderBy('created_at','asc')
                     ->paginate(5);
         return $record;
     }
 
-    public function getRecordByCustomerName($name){
-        $record = Record::where('customer_name',$name)
-                        ->orderBy('created_at','asc')
-                        ->paginate(5);
-        return $record;
-    }
-
-    public function getRecordByProductName($name){
-        $record = Record::select('record.*')
-                    ->join('unit','unit.id','=','record.unit_id')
-                    ->join('department','department.id','=','unit.department_id')
-                    ->join('product','product.id','=','record.product_id')
-                    ->join('brand','brand.id','=','product.brand_id')
-                    ->where('product.name',$name)
-                    ->orderBy('created_at','asc')
-                    ->paginate(5);
-        return $record;
-    }
-
-    public function getRecordByProductModel($name){
-        $record = Record::select('record.*')
-                    ->join('unit','unit.id','=','record.unit_id')
-                    ->join('department','department.id','=','unit.department_id')
-                    ->join('product','product.id','=','record.product_id')
-                    ->join('brand','brand.id','=','product.brand_id')
-                    ->where('product.model',$name)
-                    ->orderBy('created_at','asc')
-                    ->paginate(5);
-        return $record;
-    }
-
-    public function getRecordByDepartmentName($name){
-        $record = Record::select('record.*')
-                    ->join('unit','unit.id','=','record.unit_id')
-                    ->join('department','department.id','=','unit.department_id')
-                    ->join('product','product.id','=','record.product_id')
-                    ->join('brand','brand.id','=','product.brand_id')
-                    ->where('department.name',$name)
-                    ->orderBy('created_at','asc')
-                    ->paginate(5);
-        return $record;
-    }
-
-    public function getRecordByUnitName($name){
-        $record = Record::select('record.*')
-                    ->join('unit','unit.id','=','record.unit_id')
-                    ->join('department','department.id','=','unit.department_id')
-                    ->join('product','product.id','=','record.product_id')
-                    ->join('brand','brand.id','=','product.brand_id')
-                    ->where('unit.name',$name)
-                    ->orderBy('created_at','asc')
-                    ->paginate(5);
-        return $record;
-    }
 }

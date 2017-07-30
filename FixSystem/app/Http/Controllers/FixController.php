@@ -138,7 +138,9 @@ class FixController extends Controller
 
     public function search($category,$name){
         $recordRepository = RepositoryFactory::getRecordRepository();
+        $column = RecordService::getSearchColumn($category);
         $record = RecordService::search($recordRepository,
+                                        $column,
                                         $category,
                                         $name);
         return view('home',['records'=>$record])->render();
