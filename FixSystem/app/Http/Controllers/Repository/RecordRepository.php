@@ -35,4 +35,11 @@ class RecordRepository
         $record->save();
     }
 
+    public function saveWorkAndTrafficHour($record_id,$work_hour,$traffic_hour){
+        $record = Record::findOrFail($record_id);
+        $record->work_hour = $work_hour;
+        $record->traffic_hour = $traffic_hour;
+        $record->save();
+    }
+
 }

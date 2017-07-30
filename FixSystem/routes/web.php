@@ -42,3 +42,4 @@ Route::post('/get_model/{product_name}','FixController@getModelByProductName');
 Route::get('/edit_record/{record_id}','FixController@edit');
 Route::post('/update_record/{record_id}','FixController@update');
 Route::get('/delete_record/{record_id}','FixController@delete');
+Route::post('/update_progress_time/{record_id}','FixController@update_progress_time');

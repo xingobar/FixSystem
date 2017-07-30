@@ -20,17 +20,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
+        var now = new Date();
         $(".work_start").datetimepicker({
-            format:'YYYY-MM-DD hh:mm'
+            format:'YYYY-MM-DD hh:mm',
+            defaultDate:now
         });
         $(".work_end").datetimepicker({
-            format:'YYYY-MM-DD hh:mm'
+            format:'YYYY-MM-DD hh:mm',
+            defaultDate:now
         });
         $(".arrival_time").datetimepicker({
-            format:'YYYY-MM-DD hh:mm'
+            format:'YYYY-MM-DD hh:mm',
+            defaultDate:now
         });
         $(".departure_time").datetimepicker({
-            format:'YYYY-MM-DD hh:mm'
+            format:'YYYY-MM-DD hh:mm',
+            defaultDate:now
         });
     })
     
@@ -135,6 +140,20 @@
             </div>
         </form>
         <div class="row"></div>
+        @if($errors->any())
+            <div class="row">
+            @if($errors->first() === 'update_success')
+                <div class="alert alert-success">
+                    <strong>Success!</strong>工作進度新增成功.
+                </div>
+            @endif
+            @if($errors->first() === 'update_error')
+                <div class="alert alert-danger">
+                    <strong>Error!</strong>開始時間不得小時結束時間
+                </div>
+            @endif
+            </div>
+        @endif
         <form class="form-horizontal" method="post" action="/update_progress_time/{{$record->id}}">
             {{csrf_field()}}
             <h4>工作進度</h4>
@@ -149,7 +168,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" size="16" class="departure_time form-control" name="departure_time">
+                                    <input type="text" size="16" class="departure_time form-control" name="departure_time" value="{{$record->departure_time}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -157,7 +176,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="input-group">
-                                    <input type="text" size="16" class="arrival_time form-control" name="arrival_time">
+                                    <input type="text" size="16" class="arrival_time form-control" name="arrival_time" value="{{$record->arrival_time}}">
                                 </div>
                             </div>
                         </div>
@@ -172,7 +191,7 @@
                                </div>
                                <div class="col-md-3">
                                     <div class="input-group">
-                                        <input type="text" size="16" class="work_start form-control" name="work_start">
+                                        <input type="text" size="16" class="work_start form-control" name="work_start" value="{{$record->work_start}}">
                                     </div>
                                </div>
                                <div class="col-md-3">
@@ -180,10 +199,22 @@
                                </div>
                                <div class="col-md-3">
                                     <div class="input-group">
-                                        <input type="text" size="16" class="work_end form-control" name="work_end">
+                                        <input type="text" size="16" class="work_end form-control" name="work_end" value="{{$record->work_end}}">
                                     </div>
                                </div>
                            </div>
+                       </td>
+                    </tr>
+                    <tr>
+                        <td colspan=4>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="handle_description" style="line-height: 10;">處理描述</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" name="handle_description" rows="5" cols="" style="padding-top:20px;"></textarea>
+                                </div>
+                            </div>
                        </td>
                     </tr>
                 </tbody>
