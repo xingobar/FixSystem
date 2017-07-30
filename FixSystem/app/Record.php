@@ -30,7 +30,8 @@ class Record extends Model
                             'work_end',
                             'departure_time',
                             'arrival_time',
-                            'handle_description'];
+                            'handle_description',
+                            'finish',];
     
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');

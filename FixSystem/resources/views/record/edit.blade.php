@@ -231,7 +231,22 @@
                                     <label for="handle_description" style="line-height: 10;">處理描述</label>
                                 </div>
                                 <div class="col-md-9">
-                                    <textarea class="form-control" name="handle_description" rows="5" cols="" style="padding-top:20px;"></textarea>
+                                    <textarea class="form-control" name="handle_description" rows="5" cols="" style="padding-top:20px;">{{$record->handle_description}}</textarea>
+                                </div>
+                            </div>
+                       </td>
+                    </tr>
+                    <tr>
+                       <td colspan=4>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="finish">是否完成</label>
+                                </div>
+                                <div class="col-md-6">
+                                    <select name="finish" class="form-control">
+                                        <option value="1">完成</option>
+                                        <option value="0">未完成</option>
+                                    </select>
                                 </div>
                             </div>
                        </td>
