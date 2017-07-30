@@ -5,6 +5,10 @@
 <link rel="stylesheet" href="{{asset('css/index.css')}}">
 @endsection
 
+@section('script')
+<script src="{{asset('js/search.js')}}"></script>
+@endsection
+
 @section('content')
 <div class="container">
     @if($errors->any())
@@ -16,6 +20,26 @@
             </div>
         @endif
     @endif
+    <div class="row text-center">
+        {{csrf_field()}}
+        <div class="col-md-3 col-md-offset-3">
+            <select class="form-control" name="filter" id="filter">
+                <option value="all">顯示全部資料</option>
+                <option value="customer_name">顧客姓名</option>
+                <option value="brand_name">品牌名稱</option>
+                <option value="product_name">產品名稱</option>
+                <option value="product_model">產品型號</option>
+                <option value="department_name">部門名稱</option>
+                <option value="unit_name">單位名稱</option>
+            </select>
+        </div>
+        <div class="col-md-2">
+            <input id="filter_text" type="text" class="form-control" name="filter_text" value="" placeholder="請輸入搜尋內容">
+        </div>
+        <div class="col-md-2">
+            <button type="button" class="btn btn-info form-control search" onclick="filter()">搜尋</button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <table class="responsive-table">
@@ -31,6 +55,7 @@
                         <th scope="col">損壞描述</th>
                         <th scope="col">交通時間</th>
                         <th scope="col" colspan=2>處理時間</th>
+                        <th scope="col">狀態</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -50,6 +75,11 @@
                             <td data-title="traffic_hour">{{$record->traffic_hour}}</td>
                             <td data-title="work_hour">{{$record->work_hour}}</td>
                             <td data-title="work_hour"></td>
+                            @if($record->finish)
+                            <td data-title="status"><i class="fa fa-check" aria-hidden="true" style="color:green"></i></td>
+                            @else
+                            <td data-title="status"><i class="fa fa-times" aria-hidden="true" style="color:red"></i></td>
+                            @endif
                             <td data-title="edit_record"><a href="/edit_record/{{$record->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:2em;"></i></a></td>
                             <td data-ttile="delete_record"><a href="/delete_record/{{$record->id}}"><i class="fa fa-trash" aria-hidden="true" style="font-size:2em;color:#ce7575"></i></a></td>
                         </tr>
@@ -60,7 +90,11 @@
     </div>
     <div class="row">
         <div class="col-md-offset-2 col-md-8 text-center">
-            {{$records->render()}}
+            @if(isset($keyword))
+                {{$records->appends(['keyword'=>$keyword])->render()}}
+            @else
+                {{$records->render()}}
+            @endif
         </div>
     </div>
 </div>

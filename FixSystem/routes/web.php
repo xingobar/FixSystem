@@ -44,3 +44,6 @@ Route::post('/update_record/{record_id}','FixController@update');
 Route::get('/delete_record/{record_id}','FixController@delete');
 Route::post('/update_progress_time/{record_id}','FixController@update_progress_time');
 Route::get('/statistics','FixController@statistics');
+
+// search
+Route::post('/search/{category}/{name}','FixController@search');

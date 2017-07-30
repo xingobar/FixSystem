@@ -8,6 +8,7 @@ use App\Http\Controllers\Repository\RecordRepository;
 use App\Http\Controllers\Service\WorkService;
 use App\Http\Requests\ProgressTimeRequest;
 use App\Http\Requests\RecordRequest;
+use App\Http\Controllers\Service\RecordService;
 use Log;
 use App\Record;
 
@@ -135,8 +136,12 @@ class FixController extends Controller
         return view('record.statistics',['records'=>$records]);
     }
 
-    public function getAllRecord(){
-
+    public function search($category,$name){
+        $recordRepository = RepositoryFactory::getRecordRepository();
+        $record = RecordService::search($recordRepository,
+                                        $category,
+                                        $name);
+        return view('home',['records'=>$record])->render();
     }
 
     public function getSpecifiedProduct($brand_id){
