@@ -20,6 +20,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // brand
 Route::get('/add_brand','BrandController@create');
 Route::post('/store_brand','BrandController@store');
+Route::get('/edit_brand','BrandController@edit');
+Route::post('/update_brand/{id}','BrandController@update');
+Route::delete('/delete_brand/{id}','BrandController@delete');
 
 // product
 Route::get('/add_product','ProductController@create');

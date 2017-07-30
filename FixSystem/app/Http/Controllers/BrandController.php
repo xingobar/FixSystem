@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Service\BrandService;
 use App\Http\Controllers\Repository\BrandRepository;
+use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Requests\CreateBrandRequest;
+use App\Brand;
 
 class BrandController extends Controller
 {
@@ -42,7 +44,15 @@ class BrandController extends Controller
         ]);
     }
 
-    public function update($id){
+    public function update($id,Request $request){
+        $brandRepository = RepositoryFactory::getBrandRepository();
+        $brandRepository->updateNameById($id,$request->name);
+        return redirect()->back()->withErrors(array(['msg'=>'success']));
+    }
 
+    public function delete($id){
+        $brand = Brand::findOrFail($id);
+        $brand->delete();
+        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
     }
 }

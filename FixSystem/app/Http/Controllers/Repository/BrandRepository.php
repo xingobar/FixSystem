@@ -22,6 +22,10 @@ class BrandRepository
         return $brandId->id;
     }
 
+    public function updateNameById($id,$name){
+        Brand::where('id',$id)->update(['name'=>$name]);
+    }
+
 }
 
 
