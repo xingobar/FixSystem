@@ -52,7 +52,7 @@ class RecordRepository
 
     public function getAllRecord()
     {
-        $record = Record::orderBy('created_at','desc')->get();
+        $record = Record::orderBy('created_at','asc')->get();
         return $record;
     }
 
