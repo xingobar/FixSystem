@@ -124,6 +124,17 @@ class FixController extends Controller
 
     }
 
+    public function statistics(){
+        $recordRepository = RepositoryFactory::getRecordRepository();
+        $records = $recordRepository->getAllRecord();
+
+        return view('record.statistics',['records'=>$records]);
+    }
+
+    public function getAllRecord(){
+
+    }
+
     public function getSpecifiedProduct($brand_id){
         Log::info('selected brand id ' . $brand_id);
         $productRepository = RepositoryFactory::getProductRepository();

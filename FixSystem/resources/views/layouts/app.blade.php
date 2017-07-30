@@ -51,6 +51,7 @@
                         <li><a href="/add_product">新增商品</a></li>
                         <li><a href="/add_dep">新增部門</a></li>
                         <li><a href="/add_unit">新增單位</a></li>
+                        <li><a href="/statistics">統計</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
