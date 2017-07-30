@@ -3,21 +3,24 @@
 @section('content')
 <div class="container">
     @if($errors->any())
+    <div class="row">
         @if($errors->first() === "exists")
-        <div class="row">
-            <div class="alert alert-warning">
-                <strong>Warning!</strong>部門已存在
-            </div>
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>部門已存在
         </div>
         @endif
         @if($errors->first() === "success")
-        <div class="row">
-            <div class="alert alert-success">
-                <strong>Success!</strong> 部門新增成功.
-            </div>
+        <div class="alert alert-success">
+            <strong>Success!</strong> 部門新增成功.
+        </div>
+        @endif
+        @if($errors->has('name'))
+        <div class="alert alert-warning">
+            <strong>Warning!</strong>{{$errors->first('name')}}
         </div>
         @endif
     @endif
+    </div>
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">

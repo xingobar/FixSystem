@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Service\BrandService;
 use App\Http\Controllers\Repository\BrandRepository;
+use App\Http\Requests\CreateBrandRequest;
 
 class BrandController extends Controller
 {
@@ -21,7 +22,7 @@ class BrandController extends Controller
         return view('brand.create');
     }
 
-    public function store(Request $request){
+    public function store(CreateBrandRequest $request){
         $exists = $this->brandService->isExists($request->name);
         if($exists){
             return redirect()->back()->withErrors(array(['msg'=>'exists']))->withInput();

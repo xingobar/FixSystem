@@ -7,6 +7,7 @@ use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\RecordRepository;
 use App\Http\Controllers\Service\WorkService;
 use App\Http\Requests\ProgressTimeRequest;
+use App\Http\Requests\RecordRequest;
 use Log;
 use App\Record;
 
@@ -80,7 +81,7 @@ class FixController extends Controller
         ]);
     }
 
-    public function update($record_id,Request $request){
+    public function update($record_id,RecordRequest $request){
         try{
             $recordRepository = RepositoryFactory::getRecordRepository();
             $productRepository = RepositoryFactory::getProductRepository();

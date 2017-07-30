@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\ProductRepository;
 use App\Http\Controllers\Service\ProductService;
+use App\Http\Requests\CreateProductRequest;
 
 class ProductController extends Controller
 {
@@ -27,7 +28,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(CreateProductRequest $request){
         $exists = $this->productService->isExists($request->name,
                                                   $request->model,
                                                   $request->brand_id);

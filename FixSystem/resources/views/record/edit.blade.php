@@ -45,11 +45,21 @@
 @section('content')
 <div class="container">
     @if($errors->any())
+        <div class="row">
+            
+        </div>
         @if($errors->first() === 'success')
-            <div class="row">
-                <div class="alert alert-success">
-                    <strong>Success!</strong>修改成功！
-                </div>
+            <div class="alert alert-success">
+                <strong>Success!</strong>修改成功！
+            </div>
+        @endif
+        @if($errors->has('customer_name'))
+            <div class="alert alert-warning">
+                <strong>Wrong!</strong>{{$errors->first('customer_name')}}
+            </div>
+        @elseif($errors->has('customer_phone'))
+            <div class="alert alert-warning">
+                <strong>Wrong!</strong>{{$errors->first('customer_phone')}}
             </div>
         @endif
     @endif

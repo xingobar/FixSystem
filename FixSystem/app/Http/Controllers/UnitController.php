@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\UnitRepository;
 use App\Http\Controllers\Service\UnitService;
+use App\Http\Requests\CreateUnitRequest;
 use Log;
 
 class UnitController extends Controller
@@ -28,7 +29,7 @@ class UnitController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(CreateUnitRequest $request){
         $exists = $this->unitService->isExists($request->department_id,
                                                $request->name);
         if($exists){
