@@ -34,4 +34,15 @@ class BrandController extends Controller
     public function getBrand(){
         return $this->brandRepository->getBrand();
     }
+
+    public function edit(){
+        $brands = $this->getBrand();
+        return view('brand.edit',[
+            'brands'=>$brands
+        ]);
+    }
+
+    public function update($id){
+
+    }
 }

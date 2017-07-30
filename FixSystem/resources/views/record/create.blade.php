@@ -17,7 +17,22 @@
                 <div class="alert alert-danger">
                     <strong>Wrong!</strong>修改失敗.
                 </div>
-            @endif       
+            @endif   
+            @if($errors->has('customer_name'))
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong>{{$errors->first('customer_name')}}
+                </div>
+            @endif  
+            @if($errors->has('customer_phone'))
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong>{{$errors->first('customer_phone')}}
+                </div>  
+            @endif
+            @if($errors->has('description'))
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong>{{$errors->first('description')}}
+                </div>
+            @endif
         </div>
     @endif
     <div class="row">
@@ -32,19 +47,19 @@
                         <div class="form-group">
                             <label for="customer_name" class="col-md-2 col-md-offset-2 control-label">顧客名稱</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="customer_name" placeholder="請輸入顧客名稱" value="" required>
+                                <input type="text" class="form-control" name="customer_name" placeholder="請輸入顧客名稱" value="{{old('customer_name')}}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="customer_phone" class="col-md-2 col-md-offset-2 control-label">顧客聯絡電話</label>
                             <div class="col-md-5">
-                                <input type="number" class="form-control" name="customer_phone" value="" required>
+                                <input type="number" class="form-control" name="customer_phone" value="{{old('customer_phone')}}" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="location" class="col-md-2 col-md-offset-2 control-label">地點</label>
                             <div class="col-md-5">
-                                <input type="text" class="form-control" name="location" value="">
+                                <input type="text" class="form-control" name="location" value="{{old('location')}}">
                             </div>
                         </div>
                         <div class="form-group">
@@ -100,7 +115,7 @@
                         <div class="form-group">
                             <label for="description" class="control-label col-md-offset-2 col-md-2">損壞描述</label>
                             <div class="col-md-5">
-                                <textarea rows="5" cols="15" name="description" class="form-control"></textarea>
+                                <textarea rows="5" cols="15" name="description" class="form-control">{{old('description')}}</textarea>
                             </div>
                         </div>
                         <div class="form-group">

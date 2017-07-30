@@ -6,55 +6,118 @@
 
 <script>
     var allRecord ;
-    var created_year = [];
     var traffic_hour = [];
     var work_hour = [];
+    var filter_by ;
+    var isYear = true;
+    var created = [];
 
     allRecord = {!! $records !!}
     console.log(allRecord);
 
-    allRecord.forEach(function(data){
-        var created_at = data['created_at'];
-        created_at = new Date(created_at);
-        var year = created_at.getFullYear();
+
+    $('#filter_by').change(function(){
+        filter_by = $('#filter_by').val();
+        console.log('filter by : ' + filter_by);
+        switch(filter_by){
+            case 'year':
+                isYear = true;
+                break;
+            case 'month':
+                isYear = false;
+                break;
+        }
+        created = [];
+        traffic_hour = [];
+        work_hour = [];
+        pushCreated();
+        (filter_by === 'month') ?  convertNumToEngMonth() : '';
+        plt();
+        console.log(created);
+    })
+    pushCreated();
+    plt();
+
+    function pushCreated(){
+        allRecord.forEach(function(data){
+            var created_at = data['created_at'];
+            created_at = new Date(created_at);
+            var year = created_at.getFullYear();
+            var month = created_at.getMonth();
+            //console.log(' month : ' + created_at.getMonth());
+
+            switch(isYear){
+                case true:
+                    if(created.indexOf(year) === -1)
+                    {
+                        created.push(year);
+                        isAddTrafficHour(false,data['traffic_hour']);
+                        isAddWorkHour(false,data['work_hour']);
+                    }else{
+                        isAddTrafficHour(true,data['traffic_hour']);
+                        isAddWorkHour(true,data['work_hour']);
+                    }
+                    break;
+                case false:
+                    if(created.indexOf(month) === -1)
+                    {
+                        created.push(month);
+                        isAddTrafficHour(false,data['traffic_hour']);
+                        isAddWorkHour(false,data['work_hour']);
+                    }else{
+                        isAddTrafficHour(true,data['traffic_hour']);
+                        isAddWorkHour(true,data['work_hour']);
+                    }
+            }
+            console.log('traffic hour : ' + traffic_hour);
+            console.log('created : ' + created);
+        });
+    }
+
+    function plt(){
+        setTheme();
+        Highcharts.chart('container',{
+            chart:{
+                type:'column'
+            },
+            title:{
+                text:'處理時間統計圖'
+            },
+            xAxis:{
+                categories:created,
+                crosshair: true
+            },
+            yAxis:{
+                min:0,
+                title:{
+                    text:"Traffic & Work Hour (mins)"
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y:.1f} mins</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },series:[{
+                name:'交通時間',
+                data:traffic_hour
+            },{
+                name:'作業時間',
+                data:work_hour
+            }]
+        })
+    }
     
-        if(created_year.indexOf(year) === -1)
-        {
-            created_year.push(year);
-            isAddTrafficHour(false,data['traffic_hour']);
-            isAddWorkHour(false,data['work_hour']);
-        }else{
-            isAddTrafficHour(true,data['traffic_hour']);
-            isAddWorkHour(true,data['work_hour']);
-        }
-
-        //console.log(created_year.indexOf(year));
-        // console.log(data['created_at']);
-        // console.log(created_year);
-        console.log(traffic_hour);
-    });
-
-    function isAddTrafficHour(is_add,hour){
-        if(is_add){
-            var size = traffic_hour.length;
-            traffic_hour[size - 1] = traffic_hour[size -1] + hour;
-            return traffic_hour;
-        }
-        traffic_hour.push(hour);
-        return traffic_hour;
-    }
-
-    function isAddWorkHour(is_add,hour){
-        if(is_add){
-            var size = work_hour.length;
-            work_hour[size-1] = work_hour[size-1] + hour;
-            return work_hour;
-        }
-        work_hour.push(hour);
-        return work_hour;
-    }
-
-    Highcharts.createElement('link', {
+    function setTheme(){
+            Highcharts.createElement('link', {
         href: 'https://fonts.googleapis.com/css?family=Unica+One',
         rel: 'stylesheet',
         type: 'text/css'
@@ -260,51 +323,53 @@
         };
 
         // Apply the theme
-    Highcharts.setOptions(Highcharts.theme);
+        Highcharts.setOptions(Highcharts.theme);
+    }
 
-    Highcharts.chart('container',{
-        chart:{
-            type:'column'
-        },
-        title:{
-            text:'處理時間統計圖'
-        },
-        xAxis:{
-            categories:created_year,
-            crosshair: true
-        },
-        yAxis:{
-            min:0,
-            title:{
-                text:"Traffic & Work Hour (mins)"
-            }
-        },
-        tooltip: {
-            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:.1f} mins</b></td></tr>',
-            footerFormat: '</table>',
-            shared: true,
-            useHTML: true
-        },
-        plotOptions: {
-            column: {
-                pointPadding: 0.2,
-                borderWidth: 0
-            }
-        },series:[{
-             name:'交通時間',
-             data:traffic_hour
-        },{
-             name:'作業時間',
-             data:work_hour
-        }]
-    })
+    function isAddTrafficHour(is_add,hour){
+        if(is_add){
+            var size = traffic_hour.length;
+            traffic_hour[size - 1] = traffic_hour[size -1] + hour;
+            return traffic_hour;
+        }
+        traffic_hour.push(hour);
+        return traffic_hour;
+    }
+
+    function isAddWorkHour(is_add,hour){
+        if(is_add){
+            var size = work_hour.length;
+            work_hour[size-1] = work_hour[size-1] + hour;
+            return work_hour;
+        }
+        work_hour.push(hour);
+        return work_hour;
+    }
+
+    function convertNumToEngMonth(){
+        var month = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
+        created.sort();
+
+        created.map(function(data,i){
+            created[i] = month[data];
+        });
+
+    }
+
 </script>
+
 @endsection
 
 @section('content')
 <div class="container">
+    <div class="row" style="margin-bottom:10px;">
+        <div class="col-md-3">
+            <select class="form-control" name="filter" id="filter_by">
+                <option value="year">依照年份</option>
+                <option value="month">依照月份</option>
+            </select>
+        </div>
+    </div>
     <div class="row">
         <div class="jumbtron" id="container">
             

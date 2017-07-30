@@ -9,6 +9,7 @@ use App\Http\Controllers\Service\WorkService;
 use App\Http\Requests\ProgressTimeRequest;
 use App\Http\Requests\RecordRequest;
 use App\Http\Controllers\Service\RecordService;
+use App\Http\Requests\CreateRecordRequest;
 use Log;
 use App\Record;
 
@@ -52,11 +53,11 @@ class FixController extends Controller
         ]);
     }
 
-    public function store(Request $request){
+    public function store(CreateRecordRequest $request){
         $record = $request->except(['model','brand','department_id']);
         Log::info($record);
         $this->recordRepository->insertRecord($record);
-        return redirect()->back()->withErrors(array(['msg'=>'success']));
+        return redirect()->back()->withErrors(array(['msg'=>'success']))->withInput();
     }
 
     public function edit($record_id = 1){
