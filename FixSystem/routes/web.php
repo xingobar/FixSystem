@@ -46,4 +46,4 @@ Route::post('/update_progress_time/{record_id}','FixController@update_progress_t
 Route::get('/statistics','FixController@statistics');
 
 // search
-Route::post('/search/{category}/{name}','FixController@search');
+Route::get('/search/{category?}/{name?}','FixController@search');

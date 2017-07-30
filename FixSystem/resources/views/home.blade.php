@@ -34,10 +34,13 @@
             </select>
         </div>
         <div class="col-md-2">
-            <input id="filter_text" type="text" class="form-control" name="filter_text" value="" placeholder="請輸入搜尋內容">
+            <input id="filter_text" type="text" class="form-control" name="filter_text" value="" placeholder="請輸入搜尋內容" onkeypress="keyPress(event)">
+        </div>
+        <div class="col-md-1">
+            <button type="button" class="btn btn-info form-control search" onclick="filter()">搜尋</button>
         </div>
         <div class="col-md-2">
-            <button type="button" class="btn btn-info form-control search" onclick="filter()">搜尋</button>
+            <a href="/search" class="btn btn-success form-control">全部顯示</a>
         </div>
     </div>
     <div class="row">

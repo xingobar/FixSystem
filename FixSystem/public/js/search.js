@@ -4,19 +4,6 @@ var filter_text;
 $(document).ready(function(){
 
     ajaxSetup();
-   // filter();
-    // $('.search').click(function(e){
-    //     e.preventDefault();
-    //     filter_category = $('#filter').val();
-    //     filter_text = $('#filter_text').val();
-    //     //console.log(filter_text);
-    //     switch(filter_category){
-    //         case 'brand_name':
-    //             console.log('brand name');
-    //             searchBrandByName(filter_text);
-    //             break;
-    //     }
-    // });
 });
 
 function ajaxSetup(){
@@ -38,9 +25,20 @@ function filter(){
 
 function search(url){
     ajaxSetup();
+    getRecord(url);
+}
+
+function keyPress(event){
+    if (event.keyCode == 13) {
+        filter_text = $('#filter_text').val();
+        getRecord('/search');
+    }
+}
+
+function getRecord(url){
     $.ajax({
         url:url+'/' + filter_category + '/' +filter_text,
-        type:'post',
+        type:'get',
         async:false,
         dataType:'html',
         success:function(data){
