@@ -207,6 +207,15 @@
                     </tr>
                     <tr>
                         <td colspan=4>
+                            @if ($errors->has('handle_description')) 
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning">
+                                        <strong>Warning!</strong>{{$errors->first('handle_description')}}
+                                    </div>
+                                </div>
+                            </div>
+                            @endif
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="handle_description" style="line-height: 10;">處理描述</label>

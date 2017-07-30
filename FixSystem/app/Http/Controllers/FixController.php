@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\RecordRepository;
 use App\Http\Controllers\Service\WorkService;
+use App\Http\Requests\ProgressTimeRequest;
 use Log;
 use App\Record;
 
@@ -101,7 +102,7 @@ class FixController extends Controller
         return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
 
-    public function update_progress_time(Request $request , $record_id){
+    public function update_progress_time(ProgressTimeRequest $request , $record_id){
         $recordRepository = RepositoryFactory::getRecordRepository();
 
         if(WorkService::isGreaterThanZero($request->departure_time,$request->arrival_time)
