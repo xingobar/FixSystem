@@ -52,15 +52,7 @@ class BrandController extends Controller
     }
 
      public function delete($id){
-        Log::info($id);
-        $brand = Brand::findOrFail($id);
-        $brand = (object)$brand;
-
-        $brand->product()->each(function($product){
-            $product->delete();
-            Log::info('product id ' . $product->id);
-        });
-        Log::info('brand id ' . $brand->id);
-        $brand->delete();
+        $this->brandRepository->deleteById($id);
+        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
     }
 }

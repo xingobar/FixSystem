@@ -43,4 +43,15 @@ class ProductRepository
         $product = Product::orderBy('created_at','asc')->get();
         return $product;
     }
+
+    public function updateProductById($id,$request){
+        $product = Product::findOrFail($id);
+        $product->fill($request->all());
+        $product->save();
+    }
+
+    public function deleteById($id){
+        $product = Product::findOrFail($id);
+        $product->delete();
+    }
 }

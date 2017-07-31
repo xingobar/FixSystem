@@ -7,6 +7,7 @@ use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Controllers\Repository\ProductRepository;
 use App\Http\Controllers\Service\ProductService;
 use App\Http\Requests\CreateProductRequest;
+use App\Product;
 
 class ProductController extends Controller
 {
@@ -37,5 +38,19 @@ class ProductController extends Controller
         }
         $this->productRepository->insertProduct($request->all());
         return redirect()->back()->withErrors(array('msg'=>'success'));
+    }
+
+    public function edit(){
+        return view('product.edit');
+    }
+
+    public function update($id,Request $request){
+        $this->productRepository->updateProductById($id,$request);
+        return redirect()->back()->withErrors(array(['msg'=>'update_success']));
+    }
+
+    public function delete($id){
+        $this->productRepository->deleteById($id);
+        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
     }
 }
