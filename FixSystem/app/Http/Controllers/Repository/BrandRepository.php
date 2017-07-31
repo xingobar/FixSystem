@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Repository;
 
 use App\Brand;
+use Log;
 
 class BrandRepository
 {
@@ -25,7 +26,6 @@ class BrandRepository
     public function updateNameById($id,$name){
         Brand::where('id',$id)->update(['name'=>$name]);
     }
-
 }
 
 

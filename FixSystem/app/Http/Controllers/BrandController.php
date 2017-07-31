@@ -8,6 +8,7 @@ use App\Http\Controllers\Repository\BrandRepository;
 use App\Http\Controllers\Factory\RepositoryFactory;
 use App\Http\Requests\CreateBrandRequest;
 use App\Brand;
+use Log;
 
 class BrandController extends Controller
 {
@@ -50,9 +51,16 @@ class BrandController extends Controller
         return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
 
-    public function delete($id){
+     public function delete($id){
+        Log::info($id);
         $brand = Brand::findOrFail($id);
+        $brand = (object)$brand;
+
+        $brand->product()->each(function($product){
+            $product->delete();
+            Log::info('product id ' . $product->id);
+        });
+        Log::info('brand id ' . $brand->id);
         $brand->delete();
-        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
     }
 }

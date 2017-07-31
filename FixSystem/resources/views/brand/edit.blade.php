@@ -33,7 +33,7 @@
                             <th scope="row">{{$brand->id}}</th>
                             <th scope="name">{{$brand->name}}</th>
                             <td data-title="edit_brand"><a data-toggle="modal" data-target="#{{$brand->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:2em;"></i></a></td>
-                            <td data-ttile="delete_brand"><a data-toggle="modal" data-target="#myModal"><i class="fa fa-trash" aria-hidden="true" style="font-size:2em;color:#ce7575"></i></a></td>
+                            <td data-ttile="delete_brand"><a href="/delete_brand/{{$brand->id}}"><i class="fa fa-trash" aria-hidden="true" style="font-size:2em;color:#ce7575"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>
