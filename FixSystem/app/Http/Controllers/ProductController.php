@@ -41,7 +41,10 @@ class ProductController extends Controller
     }
 
     public function edit(){
-        return view('product.edit');
+        $products = $this->productRepository->getProduct();
+        return view('product.edit',[
+            'products'=>$products
+        ]);
     }
 
     public function update($id,Request $request){

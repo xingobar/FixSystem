@@ -33,4 +33,21 @@ class DepartmentController extends Controller
         $this->departmentRepository->insertDepartment($request->all());
         return redirect()->back()->withErrors(array(['msg'=>'success']));
     }
+
+    public function edit(){
+        $deps = $this->departmentRepository->getDepartmentOrderByCreatedAt();
+        return view('dep.edit',[
+            'deps'=>$deps
+        ]);
+    }
+
+    public function update($id,Request $request){
+        $this->departmentRepository->updateById($id,$request);
+        return redirect()->back()->withErrors(array(['msg'=>'update_success']));
+    }
+
+    public function delete($id){
+        $this->departmentRepository->deleteById($id);
+        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
+    }
 }

@@ -31,11 +31,13 @@
         traffic_hour = [];
         work_hour = [];
         pushCreated();
+        created.sort();
         (filter_by === 'month') ?  convertNumToEngMonth() : '';
         plt();
         console.log(created);
     })
     pushCreated();
+    created.sort();
     plt();
 
     function pushCreated(){
@@ -348,8 +350,7 @@
 
     function convertNumToEngMonth(){
         var month = ['Jan','Feb','March','April','May','June','July','Aug','Sep','Oct','Nov','Dec'];
-        created.sort();
-
+ 
         created.map(function(data,i){
             created[i] = month[data];
         });

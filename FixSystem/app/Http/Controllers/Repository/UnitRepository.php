@@ -20,4 +20,15 @@ class UnitRepository
         $unit = Unit::orderBy('created_at','asc')->get();
         return $unit;
     }
+
+    public function updateById($id,$request){
+        $unit = Unit::findOrFail($id);
+        $unit->fill($request->all());
+        $unit->save();
+    }
+
+    public function deleteById($id){
+        $unit = Unit::findOrFail($id);
+        $unit->delete();
+    }
 }

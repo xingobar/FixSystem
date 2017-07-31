@@ -47,10 +47,42 @@
                         &nbsp;
                         <li><a href="/home">首頁</a></li>
                         <li><a href="/add_record">新增報修</a></li>
-                        <li><a href="/add_brand">新增品牌</a></li>
-                        <li><a href="/add_product">新增商品</a></li>
-                        <li><a href="/add_dep">新增部門</a></li>
-                        <li><a href="/add_unit">新增單位</a></li>
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">品牌
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/edit_brand">全部品牌</a></li>
+                                <li><a href="/add_brand">新增品牌</a></li>
+                            </ul>
+                        </li>
+                        
+                         <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">商品
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/edit_product">全部商品</a></li>
+                                <li><a href="/add_product">新增商品</a></li>
+                            </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">部門
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/edit_dep">全部部門</a></li>
+                                <li><a href="/add_dep">新增部門</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">單位
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/edit_unit">全部單位</a></li>
+                                <li><a href="/add_unit">新增單位</a></li>
+                            </ul>
+                        </li>
                         <li><a href="/statistics">統計</a></li>
                     </ul>
 
@@ -61,24 +93,20 @@
                             <li><a href="{{ route('login') }}">登入</a></li>
                             <li><a href="{{ route('register') }}">註冊</a></li>
                         @else
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
+                            <li>
+                                <a href="#">{{ Auth::user()->name }} </a>
+                            </li>    
+                            <li>
+                                <a href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                             登出
-                                        </a>
+                                </a>
 
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </li>
                         @endif
                     </ul>
@@ -91,6 +119,10 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     @yield('script')
 </body>
 </html>

@@ -39,4 +39,21 @@ class UnitController extends Controller
         $this->unitRepository->insertUnit($request->all());
         return redirect()->back()->withErrors(array(['msg'=>'success']))->withInput();
     }
+
+    public function edit(){
+        $units = $this->unitRepository->getUnit();
+        return view('unit.edit',[
+            'units'=>$units
+        ]);
+    }
+
+    public function update($id,Request $request){
+        $this->unitRepository->updateById($id,$request);
+        return redirect()->back()->withErrors(array(['msg'=>'update_success']));
+    }
+
+    public function delete($id){
+        $this->unitRepository->deleteById($id);
+        return redirect()->back()->withErrors(array(['msg'=>'delete_success']));
+    }
 }

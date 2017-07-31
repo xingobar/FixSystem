@@ -27,14 +27,23 @@ Route::get('/delete_brand/{id}','BrandController@delete');
 // product
 Route::get('/add_product','ProductController@create');
 Route::post('/store_product','ProductController@store');
+Route::get('/edit_product','ProductController@edit');
+Route::post('/update_product/{id}','ProductController@update');
+Route::get('/delete_product/{id}','ProductController@delete');
 
 // department
 Route::get('/add_dep','DepartmentController@create');
 Route::post('/store_dep','DepartmentController@store');
+Route::get('/edit_dep','DepartmentController@edit');
+Route::post('/update_dep/{id}','DepartmentController@update');
+Route::get('/delete_dep/{id}','DepartmentController@delete');
 
 // unit
 Route::get('/add_unit','UnitController@create');
 Route::post('/store_unit','UnitController@store');
+Route::get('/edit_unit','UnitController@edit');
+Route::post('/update_unit/{id}','UnitController@update');
+Route::get('/delete_unit/{id}','UnitController@delete');
 
 // record
 Route::get('/add_record','FixController@create');
