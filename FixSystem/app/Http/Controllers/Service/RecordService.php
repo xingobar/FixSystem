@@ -37,27 +37,12 @@ class RecordService
     {  
         switch($category)
         {
-            case 'brand_name':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
-            case 'customer_name':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
-            case 'product_name':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
-            case 'product_model':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
-            case 'department_name':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
-            case 'unit_name':
-                $record = $recordRepo->getRecordBySomething($column,$name);
-                break;
             case 'all':
                 $record = $recordRepo->getRecord();
                 break;
+            default:
+                $record = $recordRepo->getRecordBySomething($column,$name);
+
         }
         return $record;
     }

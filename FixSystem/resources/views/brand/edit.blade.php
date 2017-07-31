@@ -14,6 +14,11 @@
                 <strong>Success!</strong>修改成功.
             </div>
         @endif
+        @if($errors->first() === 'delete_success')
+            <div class="alert alert-success">
+                <strong>Success!</strong>刪除成功
+            </div>
+        @endif
         </div>
     @endif
     <div class="row">

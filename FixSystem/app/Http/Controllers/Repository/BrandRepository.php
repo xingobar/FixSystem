@@ -27,7 +27,7 @@ class BrandRepository
         Brand::where('id',$id)->update(['name'=>$name]);
     }
 
-    public function deleteById($id,$brand){
+    public function deleteById($id){
         $brand = Brand::findOrFail($id);
         $brand = (object)$brand;
 
