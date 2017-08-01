@@ -48,6 +48,8 @@
                         <li><a href="/home">首頁</a></li>
                         <li><a href="/add_record">新增報修</a></li>
                         
+                        @if(Auth::check())
+                            @if(Auth::user()->isAdmin())
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">品牌
                             <span class="caret"></span></a>
@@ -83,6 +85,18 @@
                                 <li><a href="/add_unit">新增單位</a></li>
                             </ul>
                         </li>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">用戶
+                            <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/edit_user">全部用戶</a></li>
+                                <li><a href="/add_user">新增用戶</a></li>
+                            </ul>
+                        </li>
+                            @endif
+                        @endif
+
                         <li><a href="/statistics">統計</a></li>
                     </ul>
 

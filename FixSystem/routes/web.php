@@ -62,3 +62,10 @@ Route::get('/search/{category?}/{name?}','FixController@search');
 
 // pdf
 Route::get('/export_pdf/{id}','FixController@exportPdf');
+
+//user
+Route::get('/add_user','UserController@create');
+Route::post('/store_user','UserController@store');
+Route::get('/edit_user','UserController@edit');
+Route::post('/update_user/{id}','UserController@update');
+Route::get('/delete_user/{id}','UserController@delete');
