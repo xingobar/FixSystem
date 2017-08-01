@@ -16,7 +16,7 @@ class UnitController extends Controller
 
     public function __construct(UnitRepository $unitRepository,
                         UnitService $unitService){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->unitRepository = $unitRepository;
         $this->unitService = $unitService;
     }

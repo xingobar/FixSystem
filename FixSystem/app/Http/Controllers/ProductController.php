@@ -16,7 +16,7 @@ class ProductController extends Controller
     protected $productServicel;
 
     public function __construct(ProductRepository $productRepository,ProductService $productService){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->productRepository = $productRepository;
         $this->productService = $productService;
     }

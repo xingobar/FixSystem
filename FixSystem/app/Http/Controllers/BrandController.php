@@ -16,7 +16,7 @@ class BrandController extends Controller
     protected $brandRepository;
 
     public function __construct(BrandService $brandService,BrandRepository $brandRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->brandService = $brandService;
         $this->brandRepository = $brandRepository;
     }

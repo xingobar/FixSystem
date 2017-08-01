@@ -15,7 +15,7 @@ class DepartmentController extends Controller
 
     public function __construct(DepartmentService $departmentService,
                         DepartmentRepository $departmentRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->departmentService = $departmentService;
         $this->departmentRepository = $departmentRepository;
     }

@@ -20,7 +20,7 @@ class FixController extends Controller
     protected $recordRepository;
 
     public function __construct(RecordRepository $recordRepository){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->recordRepository = $recordRepository;
     }
 

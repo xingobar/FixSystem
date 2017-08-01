@@ -17,7 +17,7 @@ class UserController extends Controller
     public function __construct(UserRepositoryInterface $userRepo,
                                 UserServiceInterface $userService,
                                 AuthorityRepositoryInterface $authRepo){
-        $this->middleware('auth');
+        $this->middleware(['auth','admin']);
         $this->userRepo = $userRepo;
         $this->userService = $userService;
         $this->authRepo = $authRepo;
