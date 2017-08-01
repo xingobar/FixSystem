@@ -59,3 +59,6 @@ Route::get('/statistics','FixController@statistics');
 
 // search
 Route::get('/search/{category?}/{name?}','FixController@search');
+
+// pdf
+Route::get('/export_pdf/{id}','FixController@exportPdf');

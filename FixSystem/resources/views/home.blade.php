@@ -61,6 +61,7 @@
                         <th scope="col">狀態</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -85,6 +86,7 @@
                             @endif
                             <td data-title="edit_record"><a href="/edit_record/{{$record->id}}"><i class="fa fa-pencil-square-o" aria-hidden="true" style="font-size:2em;"></i></a></td>
                             <td data-ttile="delete_record"><a href="/delete_record/{{$record->id}}"><i class="fa fa-trash" aria-hidden="true" style="font-size:2em;color:#ce7575"></i></a></td>
+                            <td data-title="export_pdf"><a href="/export_pdf/{{$record->id}}"><i class="fa fa-file-pdf-o" aria-hidden="true" style="font-size:2em;"></i></a></td>
                         </tr>
                     @endforeach
                 </tbody>

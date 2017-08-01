@@ -11,6 +11,7 @@ use App\Http\Requests\RecordRequest;
 use App\Http\Controllers\Service\RecordService;
 use App\Http\Requests\CreateRecordRequest;
 use Log;
+use PDF;
 use App\Record;
 
 class FixController extends Controller
@@ -145,6 +146,13 @@ class FixController extends Controller
                                         $category,
                                         $name);
         return view('home',['records'=>$record])->render();
+    }
+
+    public function exportPdf($id){
+        $record = $this->recordRepository->getSpecifiedRecord($id);
+        $data = (object)$record[0];
+        $pdf = PDF::loadView('pdf.record',['data' => $data]);
+        return $pdf->stream('record.pdf');
     }
 
     public function getSpecifiedProduct($brand_id){
